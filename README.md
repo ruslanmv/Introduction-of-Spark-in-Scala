@@ -410,11 +410,16 @@ Here we will create an empty dataframe with schema. We will make use of createDa
 
 
 
+To determine the class of a Scala object, you can use `.getClass` ,method
 
-How to determine the class of a Scala object (getClass)
+```
+   df.getClass
+```
 
+![image-20230610135304360](assets/images/posts/README/image-20230610135304360.png)
 
-Spark Read ORC file
+## Spark Read ORC file
+
 Use Spark DataFrameReader’s orc() method to read ORC file into DataFrame. This supports reading snappy, zlib or no compression, it is not necessary to specify in compression option while reading a ORC file.
 
 Spark 2.x:
@@ -435,14 +440,15 @@ Spark 1.6:
 hiveContext.read.orc('tmp/orc/data.orc')
 ```
 
-
+### How to use if conditional in scala
 
 ```
 if(Boolean_expression) {
    // Statements will execute if the Boolean expression is true
 }
 ```
-How to match multiple conditions (patterns) with one case statement
+### How to match multiple conditions (patterns) with one case statement
+
 ```
 val cmd = "stop"
 cmd match {
@@ -452,7 +458,7 @@ cmd match {
 }
 ```
 
-Scala If-Else-If Ladder Example
+### Scala If-Else-If Ladder Example
 
 ```
 var number:Int = 85  
@@ -477,8 +483,7 @@ else if(number>=90 && number<=100){
 else println ("Invalid")  
 ```
 
-
-Merge Multiple Data Frames in Spark
+### Merge Multiple Data Frames in Spark
 
 ```
       // Approach 1
@@ -537,22 +542,137 @@ The code below shows how to initialize an empty Sequence.
 val emptySeq: Seq[String] = Seq.empty[String]
 ```
 
-Need	Method
-append 1 item	oldSeq :+ e
-append multiple items	oldSeq ++ newSeq
-prepend 1 item	e +: oldSeq
-prepend multiple items	newSeq ++: oldSeq
+Summarizing :
+
+- To append 1 item	`oldSeq :+ e`
+- To append multiple items	`oldSeq ++ newSeq`
+- To prepend 1 item	`e +: oldSeq`
+- To prepend multiple items	`newSeq ++: oldSeq`
+
+
+
+## Objects vs Classes
+
+In Scala, an object is a named instance with members such as fields and methods.
+
+ An object and a class that have the same name and which are defined in the same source file are known as companions. 
+
+Companions has special access control properties, which is covered under Scala
+
+A simple example of an **object**:
+
+```
+object SimpleObject
+val a = SimpleObject
+```
+
+The members of objects are similar to the members of classes.  An example of **members in an object:**
+
+```
+object MembersObject {
+  val someValue = "test"
+  def someMethod(a:Int) = a*a
+}
+```
+
+
+
+For example
+
+```
+println("someValue is: " + MembersObject.someValue) 
+```
+
+Prints "someValue is: test".
+
+![image-20230610135812639](assets/images/posts/README/image-20230610135812639.png)
+
+```
+println("someMethod(3) gives: " + MembersObject.someMethod(3)) 
+```
+
+Prints "someMethod(3) gives: 9".
+
+![image-20230610135834733](assets/images/posts/README/image-20230610135834733.png)
+
+
+
+A third use of objects is to create the entry point to a Scala program. This is done by defining a "main" method with a specific signature:
+
+```
+object ProgramEntryPoint {
+  def main(args:Array[String]) = {
+    println("Program execution start.")
+    println("Program execution end.")
+  }
+}
+```
+
+and you can execute this Program by giving the argument for example `Array("Hello")`
+
+![image-20230610140228042](assets/images/posts/README/image-20230610140228042.png)
+
+
+
+## Functions in Scala
+
+A function, that does not return anything can return a **Unit** and indicates that function does not return anything and are called procedures.
+
+```
+object Hello{
+   def printMe( ) : Unit = {
+      println("Hello, Scala!")
+   }
+}
+```
+
+## Calling Function
+
+Scala provides a number of syntactic variations for invoking methods. Following is the standard way to call a method 
+
+![image-20230610141439536](assets/images/posts/README/image-20230610141439536.png)
+
+
+
+```
+object Demo {
+   def main(args: Array[String]) {
+      println( "Returned Value : " + addInt(5,7) );
+   }
+   def addInt( a:Int, b:Int ) : Int = {
+      var sum:Int = 0
+      sum = a + b
+      return sum
+   }
+}
+```
+
+Calling Function, by choosing the operation, you want to do, for example  provide an Array[String]  like Array("Hi")
+
+```
+ Demo.main(Array("Hi"))
+```
+
+and
+
+```
+ Demo.addInt(1,2)
+```
+
+![image-20230610142715363](assets/images/posts/README/image-20230610142715363.png)
+
+
+
+
+
 Remember that Vector and Seq are immutable, so you can’t modify them. Therefore, during the append or prepend operations, you need to assign the result to a new variable.
+
 ```
 object MyClass {
-
-    def main(args: Array[String])
-    {
-         val a = Seq("Apple", "Orange", "Mango")
-
-        val temp = a :+ "Watermelon"
-
-         println(temp)
+    def main(args: Array[String]){
+    val a = Seq("Apple", "Orange", "Mango")
+	val temp = a :+ "Watermelon"
+    println(temp)
     }
 }
 ```
@@ -560,16 +680,11 @@ object MyClass {
 
 ```
 object MyClass {
-
     def main(args: Array[String])
-    {
-         val fruits = Seq("Apple", "Orange", "Mango")
-
-         val vegetables = Seq("Onion","tomato","potato")
-
-        val temp = fruits ++ vegetables
-
-         println(temp)
+    {val fruits = Seq("Apple", "Orange", "Mango")
+     val vegetables = Seq("Onion","tomato","potato")
+     val temp = fruits ++ vegetables
+     println(temp)
     }
 }
 ```
@@ -579,30 +694,22 @@ object MyClass {
 ## How to delete elements from a list in Scala?
 
 ```
-        var progLang = List("C++", "Java", "Scala", "Python")
-        
-        println("Programming Languages: " + progLang)
-        
-        var newLang = progLang.filter(_<"P")
-        
-        println("Programming Languages: " + newLang)
+var progLang = List("C++", "Java", "Scala", "Python")
+println("Programming Languages: " + progLang)
+var newLang = progLang.filter(_<"P")
+println("Programming Languages: " + newLang)
 ```
 
 ```
 import scala.collection.mutable.ListBuffer
-
-
 var progLang = ListBuffer("C", "C++", "Java", "Scala", "Python", "JavaScript")
-        
-        println("Programming Languages: " + progLang)
-        
-        println("Deleting single element")
-        progLang -= "Java"
-        println("Programming Languages: " + progLang)
-        
-        println("Deleting multiple elements")
-        progLang -= ("C", "Python")
-        println("Programming Languages: " + progLang)
+println("Programming Languages: " + progLang)
+println("Deleting single element")
+progLang -= "Java"
+println("Programming Languages: " + progLang)
+println("Deleting multiple elements")
+progLang -= ("C", "Python")
+println("Programming Languages: " + progLang)
 ```
 
 
@@ -616,7 +723,7 @@ you can print the collection elements using mkString:
 ```
 a.mkString(", ")
 ```
-res3: String = apple, banana, cherry
+![image-20230610135017406](assets/images/posts/README/image-20230610135017406.png)
 
 
 Declaring Array Variables
@@ -647,25 +754,31 @@ ab += "world"
 ab.toArray
 ```
 
+
+
+![image-20230610134934594](assets/images/posts/README/image-20230610134934594.png)
+
+
+
 ## Summary of  SparkSession Methods
 
-version – Returns Spark version where your application is running, probably the Spark version your cluster is configured with.
-conf – Returns the RuntimeConfig object.
-builder() – builder() is used to create a new SparkSession, this return SparkSession.Builder
-newSession() – Creaetes a new SparkSession.
-createDataFrame() – This creates a DataFrame from a collection and an RDD
-createDataset() – This creates a Dataset from the collection, DataFrame, and RDD.
-emptyDataFrame() – Creates an empty DataFrame.
-emptyDataset() – Creates an empty Dataset.
-getActiveSession() – Returns an active Spark session for the current thread.
-getDefaultSession() – Returns the default SparkSession that is returned by the builder.
-read() – Returns an instance of DataFrameReader class, this is used to read records from CSV, Parquet, Avro, and more file formats into DataFrame.
-sparkContext() – Returns a SparkContext.
-sql(String sql) – Returns a DataFrame after executing the SQL mentioned.
-sqlContext() – Returns SQLContext.
-stop() – Stop the current SparkContext.
-table() – Returns a DataFrame of a table or view.
-udf() – Creates a Spark UDF to use it on DataFrame, Dataset, and SQL.
+- version – Returns Spark version where your application is running, probably the Spark version your cluster is configured with.
+- conf – Returns the RuntimeConfig object.
+- builder() – builder() is used to create a new SparkSession, this return SparkSession.Builder
+- newSession() – Creaetes a new SparkSession.
+- createDataFrame() – This creates a DataFrame from a collection and an RDD
+- createDataset() – This creates a Dataset from the collection, DataFrame, and RDD.
+- emptyDataFrame() – Creates an empty DataFrame.
+- emptyDataset() – Creates an empty Dataset.
+- getActiveSession() – Returns an active Spark session for the current thread.
+- getDefaultSession() – Returns the default SparkSession that is returned by the builder.
+- read() – Returns an instance of DataFrameReader class, this is used to read records from CSV, Parquet, Avro, and more file formats into DataFrame.
+- sparkContext() – Returns a SparkContext.
+- sql(String sql) – Returns a DataFrame after executing the SQL mentioned.
+- sqlContext() – Returns SQLContext.
+- stop() – Stop the current SparkContext.
+- table() – Returns a DataFrame of a table or view.
+- udf() – Creates a Spark UDF to use it on DataFrame, Dataset, and SQL.
 
 For addtional information about [hdfs](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/fs/FileSystem.html)
 
